@@ -22,6 +22,9 @@ const cart = (state = INITIAL_STATE, action) => {
           });
         }
         break;
+      case 'CLEAR_CART':
+        draft.items = [];
+        break;
       default:
         return draft;
     }

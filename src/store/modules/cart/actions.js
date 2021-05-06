@@ -4,3 +4,7 @@ export function addProductToCart(product) {
     payload: { product } // informações
   };
 }
+
+export function clearCart() {
+  return { type: 'CLEAR_CART' };
+}
