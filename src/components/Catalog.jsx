@@ -1,8 +1,9 @@
 import { useCallback, useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import api from '../services/api';
-import { addProductToCart, clearCart } from '../store/modules/cart/actions';
+import { clearCart } from '../store/modules/cart/actions';
 import { Cart } from './Cart';
+import { CatalogItem } from './CatalogItem';
 
 const Catalog = () => {
   const dispatch = useDispatch();
@@ -13,10 +14,6 @@ const Catalog = () => {
       setCatalog(response.data);
     });
   }, []);
-
-  const handleAddProductToCart = useCallback((product) => {
-    dispatch(addProductToCart(product))
-  }, [dispatch]);
 
   const handleClearCart = useCallback(() => {
     dispatch(clearCart())
@@ -43,11 +40,7 @@ const Catalog = () => {
       <br />
       <hr />
       {catalog.map(p => (
-        <article key={p.id}>
-          <strong>{p.title}</strong> {' - '}
-          <span>{p.price}</span> {' '}
-          <button onClick={() => handleAddProductToCart(p)}>COMPRAR</button>
-        </article>
+        <CatalogItem key={p.id} product={p} />
       ))}
       <Cart />
     </>
